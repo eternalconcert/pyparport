@@ -1,0 +1,7 @@
+syntax: glob
+
+dist/*
+build/*
+MANIFEST.in
+*.egg-*
+*.pyc
