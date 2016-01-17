@@ -22,7 +22,6 @@ static PyObject* readport(PyObject* self, PyObject *args)
 
     if (!strcmp(reg, "d"))
     {
-        /* Set dataport to read mode */
         /* Read the port */
         outb(255, 0x37A);
         return Py_BuildValue("i", inb(0x378));
@@ -62,7 +61,7 @@ static PyObject* writeport(PyObject* self, PyObject *args)
 
     if (!strcmp(reg, "d"))
     {
-    /* Set dataport to write mode */
+        /* Set dataport to write mode */
         outb(0, 0x37A);
         /* Set the port */
         outb(val, 0x378);
@@ -88,15 +87,13 @@ static PyObject* writeport(PyObject* self, PyObject *args)
 static char pyparport_docs[] = "Docs go here.\n";
 
 static PyMethodDef pyparport_funcs[] = {
-    {"read", (PyCFunction)readport,
-    METH_VARARGS, pyparport_docs},
-    {"write", (PyCFunction)writeport,
-    METH_VARARGS, pyparport_docs},
+    {"read",    (PyCFunction)readport,  METH_VARARGS,   pyparport_docs},
+    {"write",   (PyCFunction)writeport, METH_VARARGS,   pyparport_docs},
     {NULL}
 };
 
-void initPyParport(void)
+void init_interface(void)
 {
-    Py_InitModule3("PyParport", pyparport_funcs,
+    Py_InitModule3("_interface", pyparport_funcs,
                     "Python parallel port object");
 }

@@ -1,7 +1,7 @@
 =========
 PyParport
 =========
-(Version 0.0.1)
+(Version 0.2)
 
 *******
 Purpose
@@ -12,29 +12,28 @@ Usage
 =====
 You need to import PyParport. This function provides a read() and a write() method. Both take the needed register as argument: d(ata), c(ontrol) or s(tatus). The write method also take the value to write as decimal number.
 
-For example:
-************
-import PyParport
+Example:
+********
+.. code:: python
 
-# To show the data of the data register
-PyParport.read("d")
+    from pyparport import PyParport
 
-# To show the data of the control register
-PyParport.read("c")
+    # To show the data of the data register:
+    PyParport.data.read()
 
-# To show the data of the status register
-PyParport.read("s")
+    # To write a 255 to the data register:
+    PyPaport.data.write(255)
 
-# To write a 0 to the data register
-PyPaport.write(0, "d")
+PyParport class implements the following registers:
+- data
+- control
+- status
 
-# To write a 255 to the data register
-PyPaport.write(255, "d")
-
+Each register brings a read and a write method.
 
 License
 =======
-PyParport is avialable under the terms of the GPLv3.
+PyParport is available under the terms of the GPLv3.
 
 
 Disclaimer
