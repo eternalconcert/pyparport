@@ -12,29 +12,26 @@ static PyObject* readport(PyObject* self, PyObject *args)
     ioperm(0x37A,1,1);
 
     char *reg;
+    int addr;
 
-    if (!PyArg_ParseTuple(args, "s", &reg))
+    if (!PyArg_ParseTuple(args, "si", &reg, &addr))
     {
         return NULL;
     }
 
-    PyArg_ParseTuple(args, "s", &reg);
+    PyArg_ParseTuple(args, "si", &reg, &addr);
 
     if (!strcmp(reg, "d"))
     {
+        /* Set dataport to read mode */
+        outb(255, addr+2);
         /* Read the port */
-        outb(255, 0x37A);
-        return Py_BuildValue("i", inb(0x378));
+        return Py_BuildValue("i", inb(addr));
     }
-    else if (!strcmp(reg, "s"))
+    else if (!strcmp(reg, "s") | !strcmp(reg, "c"))
     {
         /* Read the port */
-        return Py_BuildValue("i", inb(0x379));
-    }
-    else if (!strcmp(reg, "c"))
-    {
-        /* Read the port */
-        return Py_BuildValue("i", inb(0x37A));
+        return Py_BuildValue("i", inb(addr));
     }
     else
     {
@@ -52,29 +49,25 @@ static PyObject* writeport(PyObject* self, PyObject *args)
 
     int val;
     char *reg;
+    int addr;
 
-    if (!PyArg_ParseTuple(args, "is", &val, &reg))
+    if (!PyArg_ParseTuple(args, "isi", &val, &reg, &addr))
     {
         return NULL;
     }
-    PyArg_ParseTuple(args, "is", &val, &reg);
+    PyArg_ParseTuple(args, "isi", &val, &reg, &addr);
 
     if (!strcmp(reg, "d"))
     {
         /* Set dataport to write mode */
-        outb(0, 0x37A);
+        outb(0, addr+2);
         /* Set the port */
-        outb(val, 0x378);
+        outb(val, addr);
     }
-    else if (!strcmp(reg, "s"))
+    else if (!strcmp(reg, "s") | !strcmp(reg, "c"))
     {
         /* Set the port */
-        outb(val, 0x379);
-    }
-    else if (!strcmp(reg, "c"))
-    {
-        /* Set the port */
-        outb(val, 0x37A);
+        outb(val, addr);
     }
     else
     {

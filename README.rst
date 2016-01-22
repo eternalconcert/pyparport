@@ -1,35 +1,47 @@
 =========
 PyParport
 =========
-(Version 0.4)
+(Version 0.5)
 
 *******
 Purpose
 *******
-Connect to the first parallel port from Python.
+Connect to a parallel port from Python.
+
 
 Usage
 =====
-You need to import PyParport. This function provides a read() and a write() method. Both take the needed register as argument: d(ata), c(ontrol) or s(tatus). The write method also take the value to write as decimal number.
+Instances of the PyParport class provide a data, a status and a control method. Each method has a read() and a write() method. The write method take the value to write as an integer as argument.
+
 
 Example:
 ********
+
 .. code:: python
 
     from pyparport import PyParport
+    port = PyParport()
 
     # To show the data of the data register:
-    PyParport.data.read()
+    port.data.read()
 
     # To write a 255 to the data register:
-    PyPaport.data.write(255)
+    port.data.write(255)
 
-PyParport class implements the following registers:
+According to the registers of the parallel port, the PyParport class implements the following methods:
+
 - data
+
 - control
+
 - status
 
-Each register brings a read and a write method.
+You can change the base address of the port on object initialisation:
+
+.. code:: python
+
+    port = PyParport(base_address=632)
+
 
 License
 =======
