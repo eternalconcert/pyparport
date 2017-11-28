@@ -1,7 +1,7 @@
 =========
 PyParport
 =========
-(Version 0.5)
+(Version 0.6)
 
 *******
 Purpose
@@ -51,3 +51,12 @@ PyParport is available under the terms of the GPLv3.
 Disclaimer
 ==========
 This software comes without any warranty. You use it on your own risk. It may contain bugs, viruses or harm your hardware in another way. The developer is not responsible for any consequences which may occur because of using the software.
+
+
+Changelog
+=========
+
+Version 0.6
+***********
+- Ensuring Python3 compatibily
+- Added pyparport.PortException class

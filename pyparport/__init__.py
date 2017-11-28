@@ -1,7 +1,9 @@
 #!/usr/bin/env python
-#! coding: utf-8
+# coding: utf-8
 
 import _interface
+
+PortError = _interface.PortError
 
 
 class Port(object):
