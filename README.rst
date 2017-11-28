@@ -59,4 +59,4 @@ Changelog
 Version 0.6
 ***********
 - Ensuring Python3 compatibily
-- Added pyparport.PortException class
+- Added pyparport.PortError exception class
